@@ -1,0 +1,18 @@
+name = "Rfam"
+uuid = "38c5b72b-a3f0-437e-9f79-f3da4655de63"
+authors = ["Jorge Fernandez-de-Cossio-Diaz <j.cossio.diaz@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+DataDeps = "124859b0-ceae-595e-8997-d05f6a7a8dfe"
+Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
+FASTX = "c2308a5c-f048-11e8-3e8a-31650f418d12"
+Gzip_jll = "be1be57a-8558-53c3-a7e5-50095f79957e"
+Scratch = "6c6a2e73-6563-6170-7368-637461726353"
+
+[compat]
+julia = "1.6"
+DataDeps = "0.7"
+FASTX = "1"
+Gzip_jll = "1"
+Scratch = "1"
