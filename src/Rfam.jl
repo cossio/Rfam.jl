@@ -1,7 +1,7 @@
 module Rfam
 
 using Downloads: download
-using Scratch: @get_scratch!
+using Scratch: @get_scratch!, clear_scratchspaces!
 using FASTX: FASTA
 import Gzip_jll
 
@@ -17,6 +17,15 @@ function __init__()
     # Directory to store downloaded files.
     # This space will be unique for each Rfam database version.
     global cache = @get_scratch!("Rfam-$rfam_version")
+end
+
+"""
+    clear()
+
+Removes all downloaded data.
+"""
+function clear()
+    clear_scratchspaces!(Rfam)
 end
 
 end
