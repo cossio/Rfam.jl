@@ -4,9 +4,10 @@
 Returns a family as a vector of `FASTA.Record`.
 """
 function fetch(family::String)
-    path = joinpath(cache, "$family.fa")
+    path = joinpath(cache, "fasta_files", "$family.fa")
     if !isfile(path)
-        url = "$baseurl/fasta_files/$family.fa.gz"
+        mkpath(dirname(path))
+        url = "$rfam_baseurl/fasta_files/$family.fa.gz"
         download(url, path * ".gz"; timeout = Inf)
         gunzip(path) # decompress
     end

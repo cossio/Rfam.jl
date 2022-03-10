@@ -1,5 +1,4 @@
 using Test: @test, @testset
-using DataDeps: @datadep_str
 import Rfam
 
 @testset "Rfam fetch" begin

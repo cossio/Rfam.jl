@@ -1,26 +1,22 @@
 module Rfam
 
 using Downloads: download
-import DataDeps
-using DataDeps: DataDep, @datadep_str
 using Scratch: @get_scratch!
 using FASTX: FASTA
 import Gzip_jll
 
-include("datadeps.jl")
+include("files.jl")
 include("fetch.jl")
 include("util.jl")
 
-const version = "14.7"
-const baseurl = "http://ftp.ebi.ac.uk/pub/databases/Rfam/" * version
-
-cache = "" # store downloaded files (set by @get_scratch! in __init__)
+const rfam_version = "14.7"
+const rfam_baseurl = "http://ftp.ebi.ac.uk/pub/databases/Rfam/$rfam_version"
+cache = "" # directory to store downloaded files (set during __init__)
 
 function __init__()
-    register_datadeps()
-
-    # directory to store downloaded families
-    global cache = @get_scratch!("rfam")
+    # Directory to store downloaded files.
+    # This space will be unique for each Rfam database version.
+    global cache = @get_scratch!("Rfam-$rfam_version")
 end
 
 end
