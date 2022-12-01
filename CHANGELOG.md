@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. The format 
 
 ## [Unreleased]
 
+## [v2.0.1]
+
+- Fix bug in Rfam.cm
+
+## [v2.0.0]
+
 - Allow `dir`, `version` options, bypassing LocalPreferences.toml.
 - Changed some names, `base_url, version_dir, fasta_dir`.
 
