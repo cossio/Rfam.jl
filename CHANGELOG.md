@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## v2.0.2
+
+- Use https instead of http.
+
 ## v2.0.1
 
 - Fix bug in Rfam.cm [d02d6804b85186018f178af4430eb64e35081366].
