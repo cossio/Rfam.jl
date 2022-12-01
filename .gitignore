@@ -36,3 +36,5 @@ docs/src/literate/*.md
 
 # profiling
 *.pb.gz
+
+docs/.CondaPkg
