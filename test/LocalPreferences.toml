@@ -1,0 +1,3 @@
+[Rfam]
+RFAM_DIR = "/DATA/cossio/temp/RFAM"
+RFAM_VERSION = "14.7"
