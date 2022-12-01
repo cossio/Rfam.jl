@@ -28,7 +28,7 @@ function set_rfam_version(version)
     @info "Rfam version $version set; restart Julia for this change to take effect."
 end
 
-base_url(; version=RFAM_VERSION) = "http://ftp.ebi.ac.uk/pub/databases/Rfam/$version"
+base_url(; version=RFAM_VERSION) = "https://ftp.ebi.ac.uk/pub/databases/Rfam/$version"
 version_dir(; dir=RFAM_DIR, version=RFAM_VERSION) = mkpath(joinpath(dir, version))
 fasta_dir(; dir=RFAM_DIR, version=RFAM_VERSION) = mkpath(joinpath(version_dir(; dir, version), "fasta_files"))
 

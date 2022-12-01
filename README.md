@@ -9,7 +9,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/cossio/Rfam.jl)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/cossio/Rfam.jl)
 
-Julia package to interface with the [Rfam](http://rfam.xfam.org/) database. Only takes care of finding, downloading, and returning the path to files from the database (e.g. `Rfam.cm`, fasta files, etc.).
+Julia package to interface with the [Rfam](https://rfam.org) database. Only takes care of finding, downloading, and returning the path to files from the database (e.g. `Rfam.cm`, fasta files, etc.).
 
 ## Installation
 
