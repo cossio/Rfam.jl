@@ -1,8 +1,6 @@
 module Rfam
 
 using Downloads: download
-using Scratch: @get_scratch!, clear_scratchspaces!
-using FASTX: FASTA
 using Preferences: @set_preferences!, @load_preference
 import Gzip_jll
 
