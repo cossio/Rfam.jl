@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## v2.0.3
+
+- Fix `Rfam.seed` typo in filename.
+
 ## v2.0.2
 
 - Use https instead of http.

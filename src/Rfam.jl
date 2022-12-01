@@ -93,7 +93,7 @@ Returns the path to `Rfam.seed`.
 """
 function seed(; dir=RFAM_DIR, version=RFAM_VERSION)
     lock(RFAM_LOCK) do
-        local_path = joinpath(version_dir(; dir, version), "Rfam.clanin")
+        local_path = joinpath(version_dir(; dir, version), "Rfam.seed")
         if !isfile(local_path)
             @info "Downloading Rfam.seed to $local_path ..."
             rfam_base_url = base_url(; version)
