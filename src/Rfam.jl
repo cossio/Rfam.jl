@@ -58,7 +58,7 @@ Returns the path to `Rfam.cm` file containing the covariance models of all the f
 """
 function cm(; dir=RFAM_DIR, version::AbstractString=RFAM_VERSION)
     lock(RFAM_LOCK) do
-        local_path = joinpath(version_dir(; dir, version), "$family_id.fa")
+        local_path = joinpath(version_dir(; dir, version), "Rfam.cm")
         if !isfile(local_path)
             @info "Downloading Rfam.cm to $local_path ..."
             rfam_base_url = base_url(; version)
