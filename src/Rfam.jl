@@ -11,8 +11,8 @@ const RFAM_LOCK = ReentrantLock()
 const RFAM_DIR = @load_preference("RFAM_DIR")
 const RFAM_VERSION = @load_preference("RFAM_VERSION")
 
-isnothing(RFAM_DIR) && @warn "Set RFAM_DIR (use `Rfam.set_rfam_directory`) and restart Julia"
-isnothing(RFAM_VERSION) && @warn "Set RFAM_VERSION (use `Rfam.set_rfam_version`) and restart Julia"
+isnothing(RFAM_DIR) && @debug "RFAM_DIR not set; use `Rfam.set_rfam_directory` and restart Julia"
+isnothing(RFAM_VERSION) && @debug "RFAM_VERSION not set; use `Rfam.set_rfam_version` and restart Julia"
 
 function set_rfam_directory(dir::AbstractString)
     if isdir(dir)
@@ -28,33 +28,22 @@ function set_rfam_version(version)
     @info "Rfam version $version set; restart Julia for this change to take effect."
 end
 
-if !isnothing(RFAM_DIR) && !isnothing(RFAM_VERSION)
-    const RFAM_BASE_URL = "http://ftp.ebi.ac.uk/pub/databases/Rfam/$RFAM_VERSION"
-    const RFAM_BASE_DIR = mkpath(joinpath(RFAM_DIR, RFAM_VERSION))
-    const RFAM_FASTA_DIR = mkpath(joinpath(RFAM_BASE_DIR, "fasta_files"))
-end
-
-"""
-    clear_all_data()
-
-Removes all downloaded data.
-"""
-function clear_all_data()
-    rm(RFAM_BASEDIR; force=true, recursive=true)
-    mkpath(RFAM_BASEDIR)
-end
+base_url(; version=RFAM_VERSION) = "http://ftp.ebi.ac.uk/pub/databases/Rfam/$version"
+version_dir(; dir=RFAM_DIR, version=RFAM_VERSION) = mkpath(joinpath(dir, version))
+fasta_dir(; dir=RFAM_DIR, version=RFAM_VERSION) = mkpath(joinpath(version_dir(; dir, version), "fasta_files"))
 
 """
     fasta_file(family_id)
 
 Returns local path to `.fasta` file of `family_id`.
 """
-function fasta_file(family_id::String)
+function fasta_file(family_id::String; dir::AbstractString=RFAM_DIR, version::AbstractString=RFAM_VERSION)
     lock(RFAM_LOCK) do
-        local_path = joinpath(RFAM_FASTA_DIR, "$family_id.fa")
+        local_path = joinpath(fasta_dir(; dir, version), "$family_id.fa")
         if !isfile(local_path)
             @info "Downloading $family_id to $local_path ..."
-            url = "$RFAM_BASE_URL/fasta_files/$family_id.fa.gz"
+            rfam_base_url = base_url(; version)
+            url = "$rfam_base_url/fasta_files/$family_id.fa.gz"
             download(url, local_path * ".gz"; timeout = Inf)
             gunzip(local_path * ".gz")
         end
@@ -67,12 +56,13 @@ end
 
 Returns the path to `Rfam.cm` file containing the covariance models of all the families.
 """
-function cm()
+function cm(; dir=RFAM_DIR, version::AbstractString=RFAM_VERSION)
     lock(RFAM_LOCK) do
-        local_path = joinpath(RFAM_BASEDIR, "Rfam.cm")
+        local_path = joinpath(version_dir(; dir, version), "$family_id.fa")
         if !isfile(local_path)
             @info "Downloading Rfam.cm to $local_path ..."
-            download(RFAM_BASE_URL * "/Rfam.cm.gz", "$local_path.gz"; timeout = Inf)
+            rfam_base_url = base_url(; version)
+            download("$rfam_base_url/Rfam.cm.gz", "$local_path.gz"; timeout = Inf)
             gunzip(local_path * ".gz")
         end
         return local_path
@@ -84,12 +74,13 @@ end
 
 Returns the path to `Rfam.clanin`.
 """
-function clanin()
+function clanin(; dir=RFAM_DIR, version=RFAM_VERSION)
     lock(RFAM_LOCK) do
-        local_path = joinpath(RFAM_BASE_DIR, "Rfam.clanin")
+        local_path = joinpath(version_dir(; dir, version), "Rfam.clanin")
         if !isfile(local_path)
             @info "Downloading Rfam.clanin to $local_path ..."
-            download("$RFAM_BASE_URL/Rfam.clanin", "$local_path"; timeout = Inf)
+            rfam_base_url = base_url(; version)
+            download("$rfam_base_url/Rfam.clanin", "$local_path"; timeout = Inf)
         end
         return local_path
     end
@@ -100,12 +91,13 @@ end
 
 Returns the path to `Rfam.seed`.
 """
-function seed()
+function seed(; dir=RFAM_DIR, version=RFAM_VERSION)
     lock(RFAM_LOCK) do
-        local_path = joinpath(cache, "Rfam.seed")
+        local_path = joinpath(version_dir(; dir, version), "Rfam.clanin")
         if !isfile(local_path)
             @info "Downloading Rfam.seed to $local_path ..."
-            download("$rfam_baseurl/Rfam.seed.gz", "$local_path.gz"; timeout = Inf)
+            rfam_base_url = base_url(; version)
+            download("$rfam_base_url/Rfam.seed.gz", "$local_path.gz"; timeout = Inf)
             gunzip("$local_path.gz")
         end
         return local_path
