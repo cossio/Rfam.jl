@@ -105,8 +105,6 @@ function seed(; dir=RFAM_DIR, version=RFAM_VERSION)
 end
 
 # decompress a gunzipped file.
-gunzip(file::String) = Gzip_jll.gzip() do gzip
-    run(`$gzip -d $file`)
-end
+gunzip(file::String) = run(`$(Gzip_jll.gzip()) -d $file`)
 
 end # module
