@@ -14,3 +14,6 @@ cmfile = Rfam.cm(; dir=RFAM_DIR, version=RFAM_VERSION)
 
 seed_file = Rfam.seed(; dir=RFAM_DIR, version=RFAM_VERSION)
 @test isfile(seed_file)
+
+seed_tree = Rfam.seed_tree("RF00162"; dir=RFAM_DIR, version=RFAM_VERSION)
+@test isfile(seed_tree)

@@ -3,6 +3,8 @@ module Rfam
 using Downloads: download
 using Preferences: @set_preferences!, @load_preference
 import Gzip_jll
+import Tar
+#using CodecZlib: GzipDecompressorStream
 
 # make the loading RFAM files thread-safe
 const RFAM_LOCK = ReentrantLock()
@@ -104,7 +106,44 @@ function seed(; dir=RFAM_DIR, version=RFAM_VERSION)
     end
 end
 
+"""
+    seed_tree(family_id)
+
+Returns the path to the `.seed_tree` of the family.
+"""
+function seed_tree(family_id::AbstractString; dir=RFAM_DIR, version=RFAM_VERSION)
+    lock(RFAM_LOCK) do
+        local_path = joinpath(version_dir(; dir, version), "Rfam.seed_tree")
+        if !isdir(local_path)
+            @info "Downloading Rfam.seed_tree.tar.gz to $local_path ..."
+            rfam_base_url = base_url(; version)
+            download("$rfam_base_url/Rfam.seed_tree.tar.gz", "$local_path.tar.gz"; timeout = Inf)
+
+            # Rfam.seed_tree.tar.gz seems not to be really gunzipped, it's just a Tar archive.
+            # The Tar is extracts a nested dir, so we extract at a temp location and then move
+            temp = mktempdir()
+            Tar.extract("$local_path.tar.gz", temp)
+            mv(joinpath(temp, "Rfam.seed_tree"), local_path)
+        end
+        return joinpath(local_path, "$family_id.seed_tree")
+    end
+end
+
 # decompress a gunzipped file.
 gunzip(file::String) = run(`$(Gzip_jll.gzip()) -d $file`)
+
+# extract a tarball (.tar.gz) to a directory
+# function tarball(file::AbstractString)
+#     if endswith(file, ".tar.gz")
+#         outdir = file[1:end - 7]
+#     elseif endswith(file, ".tgz")
+#         outdir = file[1:end - 4]
+#     else
+#         throw(ArgumentError("file name does not end with .tar.gz or .tgz"))
+#     end
+#     open(GzipDecompressorStream, file) do io
+#         Tar.extract(io, outdir)
+#     end
+# end
 
 end # module

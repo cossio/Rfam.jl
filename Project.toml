@@ -1,12 +1,13 @@
 name = "Rfam"
 uuid = "38c5b72b-a3f0-437e-9f79-f3da4655de63"
 authors = ["Jorge Fernandez-de-Cossio-Diaz <j.cossio.diaz@gmail.com>"]
-version = "2.0.3"
+version = "2.0.4-DEV"
 
 [deps]
 Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 Gzip_jll = "be1be57a-8558-53c3-a7e5-50095f79957e"
 Preferences = "21216c6a-2e73-6563-6e65-726566657250"
+Tar = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
 
 [compat]
 Gzip_jll = "1"

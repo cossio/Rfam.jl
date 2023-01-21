@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+- Add `seed_tree`.
+
 ## v2.0.3
 
 - Fix `Rfam.seed` typo in filename.
