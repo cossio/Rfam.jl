@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## v2.0.4
+
 - Add `seed_tree`.
 
 ## v2.0.3
