@@ -16,7 +16,7 @@ const RFAM_VERSION = @load_preference("RFAM_VERSION")
 isnothing(RFAM_DIR) && @debug "RFAM_DIR not set; use `Rfam.set_rfam_directory` and restart Julia"
 isnothing(RFAM_VERSION) && @debug "RFAM_VERSION not set; use `Rfam.set_rfam_version` and restart Julia"
 
-function set_rfam_directory(dir::AbstractString)
+function set_rfam_directory(dir)
     if isdir(dir)
         @set_preferences!("RFAM_DIR" => dir)
         @info "RFAM Directory $dir set; restart Julia for this change to take effect."
@@ -39,7 +39,7 @@ fasta_dir(; dir=RFAM_DIR, version=RFAM_VERSION) = mkpath(joinpath(version_dir(; 
 
 Returns local path to `.fasta` file of `family_id`.
 """
-function fasta_file(family_id::String; dir::AbstractString=RFAM_DIR, version::AbstractString=RFAM_VERSION)
+function fasta_file(family_id::AbstractString; dir=RFAM_DIR, version=RFAM_VERSION)
     lock(RFAM_LOCK) do
         local_path = joinpath(fasta_dir(; dir, version), "$family_id.fa")
         if !isfile(local_path)
@@ -58,7 +58,7 @@ end
 
 Returns the path to `Rfam.cm` file containing the covariance models of all the families.
 """
-function cm(; dir=RFAM_DIR, version::AbstractString=RFAM_VERSION)
+function cm(; dir=RFAM_DIR, version=RFAM_VERSION)
     lock(RFAM_LOCK) do
         local_path = joinpath(version_dir(; dir, version), "Rfam.cm")
         if !isfile(local_path)
@@ -130,7 +130,7 @@ function seed_tree(family_id::AbstractString; dir=RFAM_DIR, version=RFAM_VERSION
 end
 
 # decompress a gunzipped file.
-gunzip(file::String) = run(`$(Gzip_jll.gzip()) -d $file`)
+gunzip(file::AbstractString) = run(`$(Gzip_jll.gzip()) -d $file`)
 
 # extract a tarball (.tar.gz) to a directory
 # function tarball(file::AbstractString)
