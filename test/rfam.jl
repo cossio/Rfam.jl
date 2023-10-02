@@ -1,10 +1,5 @@
-using Test: @test, @testset
 import Rfam
-
-Rfam.set_rfam_directory(mktempdir())
-Rfam.set_rfam_version("14.7")
-
-@info "Using temp directory:" Rfam.get_rfam_directory()
+using Test: @test, @testset
 
 fasta = Rfam.fasta_file("RF00162")
 @test isfile(fasta)
