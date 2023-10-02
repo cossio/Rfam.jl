@@ -2,7 +2,7 @@
 function set_rfam_directory(dir)
     if isdir(dir)
         @set_preferences!("RFAM_DIR" => dir)
-        @info "RFAM Directory $dir set; restart Julia for this change to take effect."
+        @info "RFAM Directory $dir set."
     else
         throw(ArgumentError("Invalid directory path: $dir"))
     end
@@ -20,7 +20,7 @@ end
 # Determines the version of Rfam used
 function set_rfam_version(version)
     @set_preferences!("RFAM_VERSION" => version)
-    @info "Rfam version $version set; restart Julia for this change to take effect."
+    @info "Rfam version $version set."
 end
 
 function get_rfam_version()
