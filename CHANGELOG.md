@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## 3.0.0
+
+### Breaking changes
+
+- New preferences functions, no need to restart Julia after changing a preference. Removed constants `RFAM_DIR`, `RFAM_VERSION`.
+
 ## v2.0.4
 
 - Add `seed_tree`.
