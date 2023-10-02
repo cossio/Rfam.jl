@@ -28,6 +28,3 @@ jobs:
       - uses: julia-actions/julia-runtest@latest
         env:
           DATADEPS_ALWAYS_ACCEPT: true  # bypass confirmation before downloading data (needed for CI)
-      - uses: julia-actions/julia-uploadcodecov@latest
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
