@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## 3.2.0
+
+- The `RFAM_DIR` and `RFAM_VERSION` preferences can now be read from environment variables `ENV["JULIA_RFAM_DIR"]` and `ENV["JULIA_RFAM_VERSION"]`, if they exist. If the `LocalPreferences.toml` file is present specifying these values, it takes precedence and the environment variables will be ignored.
+
+## 3.1.0
+
+- Added keyword arguments `rfam_version` and `rfam_dir` to most functions. These arguments override the values in a preferences file.
+
 ## 3.0.0
 
 ### Breaking changes

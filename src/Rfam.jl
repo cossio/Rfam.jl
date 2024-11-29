@@ -3,7 +3,9 @@ module Rfam
 import Gzip_jll
 import Tar
 using Downloads: download
-using Preferences: @set_preferences!, @load_preference
+using Preferences: @has_preference
+using Preferences: @load_preference
+using Preferences: @set_preferences!
 #using CodecZlib: GzipDecompressorStream
 
 include("preferences.jl")

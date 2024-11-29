@@ -1,4 +1,8 @@
-# Stores downloaded Rfam files
+"""
+    set_rfam_directory(dir)
+
+Sets the directory where Rfam data is downloaded in a LocalPreferences.toml file.
+"""
 function set_rfam_directory(dir)
     if isdir(dir)
         @set_preferences!("RFAM_DIR" => dir)
@@ -9,25 +13,31 @@ function set_rfam_directory(dir)
 end
 
 function get_rfam_directory()
-    rfam_dir = @load_preference("RFAM_DIR")
-    if isnothing(rfam_dir)
-        error("RFAM_DIR not set; use `Rfam.set_rfam_directory` to set it")
+    if @has_preference("RFAM_DIR")
+        return @load_preference("RFAM_DIR")
+    elseif haskey(ENV, "JULIA_RFAM_DIR")
+        return ENV["JULIA_RFAM_DIR"]
     else
-        return rfam_dir
+        error("RFAM_DIR not set; use `Rfam.set_rfam_directory` to set it")
     end
 end
 
-# Determines the version of Rfam used
+"""
+    set_rfam_version(version)
+
+Sets the version of Rfam used in a LocalPreferences.toml file.
+"""
 function set_rfam_version(version)
     @set_preferences!("RFAM_VERSION" => version)
     @info "Rfam version $version set."
 end
 
 function get_rfam_version()
-    rfam_version = @load_preference("RFAM_VERSION")
-    if isnothing(rfam_version)
-        error("RFAM_VERSION not set; use `Rfam.set_rfam_version` to set it")
+    if @has_preference("RFAM_VERSION")
+        return @load_preference("RFAM_VERSION")
+    elseif haskey(ENV, "JULIA_RFAM_VERSION")
+        return ENV["JULIA_RFAM_VERSION"]
     else
-        return rfam_version
+        error("RFAM_VERSION not set; use `Rfam.set_rfam_version` to set it")
     end
 end

@@ -1,5 +1,6 @@
 import Rfam
-using Test: @test, @testset
+using Test: @test
+using Test: @testset
 
 fasta = Rfam.fasta_file("RF00162")
 @test isfile(fasta)
