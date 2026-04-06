@@ -12,6 +12,14 @@ function set_rfam_directory(dir)
     end
 end
 
+"""
+    get_rfam_directory()
+
+Returns the directory used to cache Rfam data.
+
+The value is read from `LocalPreferences.toml` when available and falls back to
+the `JULIA_RFAM_DIR` environment variable.
+"""
 function get_rfam_directory()
     if @has_preference("RFAM_DIR")
         return @load_preference("RFAM_DIR")
@@ -32,6 +40,14 @@ function set_rfam_version(version)
     @info "Rfam version $version set."
 end
 
+"""
+    get_rfam_version()
+
+Returns the configured Rfam release version.
+
+The value is read from `LocalPreferences.toml` when available and falls back to
+the `JULIA_RFAM_VERSION` environment variable.
+"""
 function get_rfam_version()
     if @has_preference("RFAM_VERSION")
         return @load_preference("RFAM_VERSION")
