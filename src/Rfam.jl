@@ -13,14 +13,29 @@ include("preferences.jl")
 # make the loading of RFAM files thread-safe
 const RFAM_LOCK = ReentrantLock()
 
+"""
+    base_url(; rfam_version = get_rfam_version())
+
+Returns the base download URL for the configured Rfam release.
+"""
 function base_url(; rfam_version = get_rfam_version())
     return "https://ftp.ebi.ac.uk/pub/databases/Rfam/$rfam_version"
 end
 
+"""
+    version_dir(; rfam_dir = get_rfam_directory(), rfam_version = get_rfam_version())
+
+Returns the local directory used to cache files for an Rfam release, creating it if needed.
+"""
 function version_dir(; rfam_dir = get_rfam_directory(), rfam_version = get_rfam_version())
     return mkpath(joinpath(rfam_dir, rfam_version))
 end
 
+"""
+    fasta_dir(; rfam_dir = get_rfam_directory(), rfam_version = get_rfam_version())
+
+Returns the local directory used to cache family FASTA files, creating it if needed.
+"""
 function fasta_dir(; rfam_dir = get_rfam_directory(), rfam_version = get_rfam_version())
     return mkpath(joinpath(version_dir(; rfam_dir, rfam_version), "fasta_files"))
 end
@@ -120,7 +135,11 @@ function seed_tree(family_id::AbstractString; rfam_dir = get_rfam_directory(), r
     end
 end
 
-# decompress a gunzipped file.
+"""
+    gunzip(file)
+
+Decompresses a `.gz` file in place using the `gzip` executable provided by `Gzip_jll`.
+"""
 gunzip(file::AbstractString) = run(`$(Gzip_jll.gzip()) -d $file`)
 
 # extract a tarball (.tar.gz) to a directory
