@@ -23,7 +23,8 @@ Rfam release to use:
 ```julia
 import Rfam
 
-Rfam.set_rfam_directory("/path/to/rfam-data")
+rfam_dir = mkpath("/path/to/rfam-data")
+Rfam.set_rfam_directory(rfam_dir)
 Rfam.set_rfam_version("14.7")
 ```
 
@@ -41,7 +42,8 @@ precedence over environment variables.
 import Rfam
 import FASTX
 
-Rfam.set_rfam_directory("/path/to/rfam-data")
+rfam_dir = mkpath("/path/to/rfam-data")
+Rfam.set_rfam_directory(rfam_dir)
 Rfam.set_rfam_version("14.7")
 
 fasta = Rfam.fasta_file("RF00162")
