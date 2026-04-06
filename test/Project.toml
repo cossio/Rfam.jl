@@ -1,5 +1,6 @@
 [deps]
 Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
+Gzip_jll = "be1be57a-8558-53c3-a7e5-50095f79957e"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
