@@ -70,7 +70,7 @@ end
     end
 
     rfam_dir = mktempdir()
-    rfam_version = "offline-test-version"
+    rfam_version = "14.7"
 
     try
         Rfam.set_rfam_directory(rfam_dir)
