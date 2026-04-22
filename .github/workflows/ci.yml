@@ -14,10 +14,13 @@ jobs:
           - '1.6'
         os:
           - ubuntu-latest
-          - macOS-latest
           - windows-latest
         arch:
           - x64
+        include:
+          - os: macOS-latest
+            version: '1.11'
+            arch: aarch64
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - uses: julia-actions/setup-julia@4a12c5f801ca5ef0458bba44687563ef276522dd
