@@ -1,0 +1,29 @@
+name: Documentation
+on:
+  push:
+    branches:
+      - master
+    tags: ['*']
+  pull_request:
+permissions:
+  actions: write
+  contents: write
+  pull-requests: read
+  statuses: write
+jobs:
+  build:
+    name: Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+      - uses: julia-actions/setup-julia@fa02766e078afaaf09b14210362cee14137e6a32
+        with:
+          version: '1'
+      - uses: julia-actions/cache@a45e8fa8be21c18a06b7177052533149e61e9b38
+      - name: Install dependencies
+        run: julia --project=docs -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
+      - name: Build and deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # authentication for same-repo deploys / PR previews
+          DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}  # SSH deploy key (preferred; enables fork PR previews)
+        run: julia --project=docs docs/make.jl

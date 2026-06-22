@@ -1,0 +1,10 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+FASTX = "c2308a5c-f048-11e8-3e8a-31650f418d12"
+Literate = "98b081ad-f1c9-55d3-8b20-4c87d4299306"
+Rfam = "38c5b72b-a3f0-437e-9f79-f3da4655de63"
+
+[compat]
+Documenter = "1"
+FASTX = "2"
+Literate = "2"
