@@ -25,6 +25,10 @@ docs/site/
 # environment.
 Manifest.toml
 
+# Machine-specific preferences (e.g. written by Rfam.set_rfam_directory). These are
+# generated when running tests or building the docs and should not be committed.
+LocalPreferences.toml
+
 # built sysimage
 JuliaSysimage.so
 
