@@ -37,10 +37,13 @@ fasta = Rfam.fasta_file("RF00162")
 
 isfile(fasta)
 
-# We can read it with [FASTX.jl](https://github.com/BioJulia/FASTX.jl):
+# We can read it with [FASTX.jl](https://github.com/BioJulia/FASTX.jl), using an
+# `open(...) do` block so the file handle is closed deterministically:
 
 import FASTX
-records = collect(FASTX.FASTA.Reader(open(fasta)))
+records = open(FASTX.FASTA.Reader, fasta) do reader
+    collect(reader)
+end
 length(records)
 
 # Let us look at the first record:
