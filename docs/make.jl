@@ -15,6 +15,7 @@ Documenter.makedocs(
     modules = [Rfam],
     sitename = "Rfam.jl",
     authors = "Jorge Fernandez-de-Cossio-Diaz",
+    repo = Documenter.Remotes.GitHub("cossio", "Rfam.jl"),
     pages = [
         "Home" => "index.md",
         "Tutorial" => "literate/tutorial.md",
