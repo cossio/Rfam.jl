@@ -1,5 +1,8 @@
 # Rfam Julia package
 
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://cossio.github.io/Rfam.jl/stable)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://cossio.github.io/Rfam.jl/dev)
+
 Julia package to interface with the [Rfam](https://rfam.org) database.
 It downloads and caches Rfam data files locally, then returns their paths so
 they can be consumed by other Julia packages and external tools.
