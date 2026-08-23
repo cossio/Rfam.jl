@@ -14,4 +14,7 @@ Downloads = "1"
 Gzip_jll = "1"
 Preferences = "1"
 Tar = "1"
-julia = "1.6"
+julia = "1.12"
+
+[workspace]
+projects = ["test", "docs"]
