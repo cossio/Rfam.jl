@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+- Added [TestCompatHygiene.jl](https://github.com/cossio/TestCompatHygiene.jl) to the test suite, guarding against `test/Project.toml` repeating `[compat]` bounds the root `Project.toml` already owns.
 - Added a documentation website built with [Documenter.jl](https://github.com/JuliaDocs/Documenter.jl) and [Literate.jl](https://github.com/fredrikekre/Literate.jl).
 
 ## 3.2.0
